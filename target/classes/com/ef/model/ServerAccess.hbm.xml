@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 27/fev/2018 15:31:58 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+	<class name="com.ef.model.ServerAccess" table="server_access">
+		<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="increment" />
+		</id>
+		<property name="importLogFileId" type="java.lang.Integer">
+			<column name="import_log_file_id" />
+		</property>
+		<property name="date" type="java.util.Date">
+			<column name="date" />
+		</property>
+		<property name="ip" type="java.lang.String">
+			<column name="ip" />
+		</property>
+		<property name="request" type="java.lang.String">
+			<column name="request" />
+		</property>
+		<property name="status" type="java.lang.Integer">
+			<column name="status" />
+		</property>
+		<property name="userAgent" type="java.lang.String">
+			<column name="user_agent" />
+		</property>
+	</class>
+</hibernate-mapping>

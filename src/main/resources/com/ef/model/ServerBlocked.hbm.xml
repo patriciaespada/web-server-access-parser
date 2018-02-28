@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 28/fev/2018 10:53:07 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.ef.model.ServerBlocked" table="server_blocked">
+        <id name="ip" type="java.lang.String">
+            <column name="ip" />
+            <generator class="assigned" />
+        </id>
+        <property name="startDate" type="java.util.Date">
+            <column name="start_date" />
+        </property>
+        <property name="endDate" type="java.util.Date">
+            <column name="end_date" />
+        </property>
+        <property name="duration">
+            <column name="duration" />
+            <type name="org.hibernate.type.EnumType">
+                <param name="type">12</param>
+                <param name="enumClass">com.ef.model.ServerBlocked$ServerBlockedDurations</param>
+            </type>
+        </property>
+        <property name="threshold" type="java.lang.Integer">
+            <column name="threshold" />
+        </property>
+        <property name="numberRequests" type="java.lang.Integer">
+            <column name="number_requests" />
+        </property>
+    </class>
+</hibernate-mapping>

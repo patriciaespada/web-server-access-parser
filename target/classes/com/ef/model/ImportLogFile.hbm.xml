@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 27/fev/2018 16:30:31 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+	<class name="com.ef.model.ImportLogFile" table="import_log_file">
+		<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="increment" />
+		</id>
+		<property name="importDate" type="java.util.Date">
+			<column name="import_date" />
+		</property>
+		<property name="fileName" type="java.lang.String">
+			<column name="file_name" />
+		</property>
+		<property name="md5sum" type="java.lang.String">
+			<column name="md5sum" />
+		</property>
+        <property name="status">
+            <column name="status" />
+            <type name="org.hibernate.type.EnumType">
+                <param name="type">12</param>
+                <param name="enumClass">com.ef.model.ImportLogFile$ImportLogFileStatus</param>
+            </type>
+        </property>
+	</class>
+</hibernate-mapping>

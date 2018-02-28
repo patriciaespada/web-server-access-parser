@@ -1,0 +1,82 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+	<changeSet id="db-changelog-1.0.xml" author="patricia.espada">
+		<comment>Create table to manage the imported files.</comment>
+		<createTable tableName="import_log_file">
+			<column autoIncrement="true" name="id" type="INT(11)">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="import_date" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column name="file_name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="md5sum" type="VARCHAR(35)">
+				<constraints nullable="false" />
+			</column>
+			<column name="status" type="ENUM('PROGRESS', 'FAIL', 'SUCCESS')">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<comment>Create table for servers accesses.</comment>
+		<createTable tableName="server_access">
+			<column autoIncrement="true" name="id" type="INT(11)">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="import_log_file_id" type="INT(11)">
+				<constraints nullable="false" />
+			</column>
+			<column name="date" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column name="ip" type="VARCHAR(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="request" type="VARCHAR(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="status" type="SMALLINT(3)">
+				<constraints nullable="false" />
+			</column>
+			<column name="user_agent" type="VARCHAR(200)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<addForeignKeyConstraint
+			baseColumnNames="import_log_file_id"
+			baseTableName="server_access"
+			constraintName="fk_server_access_import_log_file"
+			onDelete="CASCADE"
+			onUpdate="RESTRICT"
+			referencedColumnNames="id"
+			referencedTableName="import_log_file" />
+
+		<comment>Create table for servers that are blocked.</comment>
+		<createTable tableName="server_blocked">
+			<column name="ip" type="VARCHAR(50)">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="start_date" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column name="end_date" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column name="duration" type="ENUM('HOURLY', 'DAILY')">
+				<constraints nullable="false" />
+			</column>
+			<column name="threshold" type="SMALLINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="number_requests" type="INT(11)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+
+</databaseChangeLog>
